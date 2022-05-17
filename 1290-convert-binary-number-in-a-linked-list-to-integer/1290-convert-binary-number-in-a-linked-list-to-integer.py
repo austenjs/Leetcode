@@ -6,9 +6,7 @@
 class Solution:
     def getDecimalValue(self, head: ListNode) -> int:
         ans = 0
-        power = 29
         while head:
-            ans += head.val * (2 ** power)
-            power -= 1
+            ans = (ans << 1) | head.val
             head = head.next
-        return ans // (2 ** (power + 1))
+        return ans

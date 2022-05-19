@@ -1,3 +1,5 @@
+import math
+
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
         ans = 0
@@ -8,14 +10,6 @@ class Solution:
                 
         
     def getLength(self, num):
-        if num < 10:
+        if num == 0:
             return 1
-        elif num < 100:
-            return 2
-        elif num < 1000:
-            return 3
-        elif num < 10000:
-            return 4
-        elif num < 100000:
-            return 5
-        return 6
+        return math.floor(math.log10(num)) + 1

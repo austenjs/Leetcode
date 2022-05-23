@@ -5,7 +5,6 @@ class NumArray:
         for i, num in enumerate(nums):
             cumsum.append(num + cumsum[i])
         self.cumsum = cumsum
-        print(cumsum)
 
     def sumRange(self, left: int, right: int) -> int:
         return self.cumsum[right + 1] - self.cumsum[left]

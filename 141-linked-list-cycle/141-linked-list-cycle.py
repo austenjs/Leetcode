@@ -9,5 +9,8 @@ class Solution:
         for i in range(10000 + 1):
             if head == None:
                 return False
+            elif head.val == 100001:
+                return True
+            head.val = 100001
             head = head.next
         return True

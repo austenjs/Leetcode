@@ -16,5 +16,4 @@ class Solution:
             return 1 + self.minDepth(root.left)
         elif root.right:
             return 1 + self.minDepth(root.right)
-        return 10000000
             

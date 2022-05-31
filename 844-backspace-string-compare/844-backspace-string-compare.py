@@ -1,18 +1,15 @@
+import itertools
+
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
-        true_s = []
-        true_t = []
-        
-        for char in s:
-            if char != '#':
-                true_s.append(char)
-            elif len(true_s):
-                true_s.pop()
-                
-        for char in t:
-            if char != '#':
-                true_t.append(char)
-            elif len(true_t):
-                true_t.pop()
-        
-        return true_s == true_t
+        return all(x == y for x, y in itertools.zip_longest(self.stringBuilder(s), self.stringBuilder(t)))
+    
+    def stringBuilder(self, s):
+        skip = 0
+        for char in reversed(s):
+            if char == '#':
+                skip += 1
+            elif skip:
+                skip -= 1
+            else:
+                yield char

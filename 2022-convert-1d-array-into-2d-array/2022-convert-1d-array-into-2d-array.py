@@ -1,16 +1,14 @@
 class Solution:
     def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
-        size = len(original)
-        if size != m * n:
+        if len(original) != m * n:
             return []
         
         ans = []
-        tmp = []
-        for i, num in enumerate(original):
-            if i != 0 and i % n == 0:
-                ans.append(tmp)
-                tmp = []
-            tmp.append(num)
+        index = 0
+        for i in range(m):
+            ans.append([])
+            for _ in range(n):
+                ans[i].append(original[index])
+                index += 1
         
-        ans.append(tmp)
         return ans

@@ -6,24 +6,21 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        self.memo = {}
+        self.ans = True
+
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        if root is None:
-            return True
-        return abs(self.height(root.left) - self.height(root.right)) <= 1 \
-            and self.isBalanced(root.left) \
-            and self.isBalanced(root.right)
+        _ = self.height(root)
+        return self.ans
         
     def height(self, node):
         if node is None:
             return 0
-        if node in self.memo:
-            return self.memo[node]
         left_height = self.height(node.left)
         right_height = self.height(node.right)
         if left_height > right_height:
             height = 1 + left_height
         else:
             height = 1 + right_height
-        self.memo[node] = height
+        if left_height - right_height > 1 or right_height - left_height > 1:
+            self.ans = False
         return height

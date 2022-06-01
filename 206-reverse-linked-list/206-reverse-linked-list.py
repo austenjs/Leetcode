@@ -10,6 +10,6 @@ class Solution:
         while pointer:
             tmp = pointer.next
             pointer.next = prev
-            prev = pointer
-            pointer = tmp
+            prev, pointer = pointer, tmp
+        
         return prev

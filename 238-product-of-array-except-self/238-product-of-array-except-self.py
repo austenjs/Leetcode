@@ -1,22 +1,22 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        bins = [1 for _ in range(61)]
-        offset = 30
+        N = len(nums)
+        left = [0 for _ in range(N)]
+        right = [0 for _ in range(N)]
         
-        visited = set()
+        left[0] = nums[0]
+        for i in range(1, N):
+            left[i] = left[i - 1] * nums[i]
         
-        for num in nums:
-            for i in range(61):
-                if i == num + offset and not num in visited:
-                    continue
-                bins[i] *= num
-            visited.add(num)
-        
+        right[-1] = nums[-1]
+        for i in range(N - 2, -1, -1):
+            right[i] = right[i + 1] * nums[i]
+            
         ans = []
-        for num in nums:
-
-            if not num in visited:
-                ans.append(0)
-            else:
-                ans.append(bins[num + offset])
+        ans.append(right[1])
+        
+        for i in range(1, N - 1):
+            ans.append(left[i - 1] * right[i + 1])
+        ans.append(left[-2])
+        
         return ans

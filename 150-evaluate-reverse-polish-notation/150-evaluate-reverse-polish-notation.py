@@ -6,7 +6,7 @@ class Solution:
         self.operator_to_function = {"+" : (lambda x, y : x + y),
                                      "-" : (lambda x, y : x - y),
                                     "*" : (lambda x, y : x * y),
-                                    "/" : (lambda x, y : self.custom_div(x, y))}
+                                    "/" : (lambda x, y : int(x / y))}
     
     def evalRPN(self, tokens: List[str]) -> int:
         stack = []
@@ -24,8 +24,3 @@ class Solution:
     
     def get_operator(self, token):
         return self.operator_to_function[token]
-
-    def custom_div(self, num1, num2):
-        if (num1 < 0 and num2 < 0) or (num1 > 0 and num2 > 0):
-            return num1 // num2
-        return math.ceil(num1 / num2)

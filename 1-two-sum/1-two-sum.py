@@ -5,12 +5,9 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        visited = set()
+        hashmap = {}
         for i, num in enumerate(nums):
             complement = target - num
-            if complement not in visited:
-                visited.add(num)
-                continue
-            for j in range(i):
-                if nums[j] == complement:
-                    return [i, j]
+            if complement in hashmap:
+                return[i, hashmap[complement]]
+            hashmap[num] = i

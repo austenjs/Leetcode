@@ -1,35 +1,16 @@
 class Solution:
-    def __init__(self):
-        self.memo = {0 : 0}
-
     def coinChange(self, coins: List[int], amount: int) -> int:
-        if amount == 0:
-            return 0
-        if min(coins) > amount:
-            return -1
+        # coins = [1, 2, 5]
+        # amt = 6
+        # F(5) = 1
+        # min(F(5 - 1), F(5 - 2), F(5 - 5)) + 1
+        # F = [0, 1, 1, 2, 2, 1, 2]
+        memo = [1e5 for _ in range(amount + 1)]
+        memo[0] = 0
+        
         for coin in coins:
-            self.memo[coin] = 1
-        return self.getMinCoins(sorted(coins)[::-1], amount)
-
-    def getMinCoins(self, coins, amount):
-        # Base case
-        if amount < 0:
-            return -1
-        if amount in self.memo:
-            return self.memo[amount]
+            for i in range(coin, amount + 1):
+                memo[i] = min(memo[i], memo[i - coin] + 1)
         
-        minimum = 10000
-        for coin in coins:
-            additional_coins = self.getMinCoins(coins, amount - coin)
-            if additional_coins == -1:
-                continue
-            minimum = min(minimum, additional_coins)
+        return memo[amount] if memo[amount] != 1e5 else -1
         
-        ans = 0
-        if minimum == 10000:
-            ans = -1
-        else:
-            ans = 1 + minimum
-        
-        self.memo[amount] = ans
-        return ans

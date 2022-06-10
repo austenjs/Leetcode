@@ -3,19 +3,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        counter = [0, 0, 0]
-        for num in nums:
-            counter[num] += 1
-        index = 0
-        while counter[0] > 0:
-            nums[index] = 0
-            index += 1
-            counter[0] -= 1
-        while counter[1] > 0:
-            nums[index] = 1
-            index += 1
-            counter[1] -= 1
-        while counter[2] > 0:
-            nums[index] = 2
-            index += 1
-            counter[2] -= 1
+        bins = [0 for _ in range(3)]
+        for col in nums:
+            bins[col] += 1
+        for i in range(len(nums)):
+            if bins[0]:
+                nums[i] = 0
+                bins[0] -= 1
+            elif bins[1]:
+                nums[i] = 1
+                bins[1] -= 1
+            else:
+                nums[i] = 2

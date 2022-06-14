@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/5/2022 at 4:1)](https://leetcode.com/problems/sort-array-by-parity/discuss/2152500/Python-or-O(n)-time-O(1)-space-or-Simple)  
 <h2>  Sort Array By Parity</h2><hr><div><p>Given an integer array <code>nums</code>, move all the even integers at the beginning of the array followed by all the odd integers.</p>
 
 <p>Return <em><strong>any array</strong> that satisfies this condition</em>.</p>

@@ -1,9 +1,7 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        if n == 1:
-            return ["()"]
-        elif n == 2:
-            return ["()()", "(())"]
+        if n == 0:
+            return [""]
         
         ans = []
         added = set()

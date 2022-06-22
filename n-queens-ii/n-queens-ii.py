@@ -1,12 +1,10 @@
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        board = [[False for _ in range(n)] for _ in range(n)]
         queens = set()
         
         def backtrack(row, count):
             for col in range(n):
                 if not under_attack(row, col):
-                    board[row][col] = True
                     queens.add((row, col))
                     if row + 1 == n:
                         count += 1

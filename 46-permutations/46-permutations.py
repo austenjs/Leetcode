@@ -1,27 +1,24 @@
-from collections import deque
-
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        N = len(nums)
-        indices = self.generate_index(N)
         ans = []
-        for index in indices:
-            tmp = []
-            for i in index:
-                tmp.append(nums[i])
-            ans.append(tmp)
+        list_of_indices = self.generate_index(len(nums))
+        for indice in list_of_indices:
+            cur = []
+            for index in indice:
+                cur.append(nums[index])
+            ans.append(cur)
         return ans
 
     def generate_index(self, N):
         if N == 1:
             return [[0]]
-        ans = []
-        children = self.generate_index(N - 1)
         new_index = N - 1
-        for child in children:
-            for i in range(len(child) + 1):
-                tmp = child.copy()
-                tmp.insert(i, new_index)
-                ans.append(tmp)
+        prev_indices = self.generate_index(N - 1)
+        
+        ans = []
+        for indice in prev_indices:
+            for i in range(len(indice) + 1):
+                new_indice = indice.copy()
+                new_indice.insert(i, new_index)
+                ans.append(new_indice)
         return ans
-            

@@ -7,7 +7,6 @@ class Solution:
         for i in range(numCourses):
             if i in checked:
                 continue
-            checked.add(i)
             queue = deque([i])
             visited = set()
             while queue:
@@ -19,6 +18,7 @@ class Solution:
                 visited.add(cur)
                 for target in adj_list[cur]:
                     queue.append(target)
+            checked.add(i)
         return True
         
     def create_adj_list(self, prerequisites):

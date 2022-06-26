@@ -7,6 +7,7 @@ class Solution:
         for i in range(numCourses):
             if i in checked:
                 continue
+            checked.add(i)
             queue = deque([i])
             visited = set()
             while queue:

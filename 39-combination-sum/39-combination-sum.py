@@ -7,12 +7,12 @@ class Solution:
                 return
             elif sum(cur) > target:
                 return
-            for i in range(start, N):
-                candidate = candidates[i]
-                cur.append(candidate)
-                backtrack(i, cur)
-                cur.pop()
-
+            else:
+                for i in range(start, N):
+                    cur.append(candidates[i])
+                    backtrack(i, cur)
+                    cur.pop()
+        
         output = []
         backtrack()
         return output

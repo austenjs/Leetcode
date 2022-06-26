@@ -3,7 +3,10 @@ from collections import deque, defaultdict
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         adj_list = self.create_adj_list(prerequisites)
+        checked = set()
         for i in range(numCourses):
+            if i in checked:
+                continue
             queue = deque([i])
             visited = set()
             while queue:

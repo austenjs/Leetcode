@@ -7,24 +7,17 @@
 from collections import deque
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        adj_list = {} # child-parent
-        queue = deque([(None, root)])
-        while queue:
-            parent, cur = queue.popleft()
-            adj_list[cur] = parent
-            if cur.left:
-                queue.append((cur, cur.left))
-            if cur.right:
-                queue.append((cur, cur.right))
+        if root is None:
+            return None
+        if root.val == p.val or root.val == q.val:
+            return root
         
-        visited_by_p = set()
-        cur = p
-        while cur:
-            visited_by_p.add(cur)
-            cur = adj_list[cur]
-
-        while q:
-            if q in visited_by_p:
-                return q
-            q = adj_list[q]
-        return None
+        leftnode = self.lowestCommonAncestor(root.left, p, q)
+        rightnode = self.lowestCommonAncestor(root.right, p, q)
+        
+        if leftnode is None:  
+            return rightnode
+        if rightnode is None:
+            return leftnode
+        
+        return root

@@ -14,7 +14,7 @@ class Solution:
                 cur = queue.popleft()
                 if cur == i and cur in visited:
                     return False
-                if cur in visited:
+                elif cur in visited:
                     continue
                 visited.add(cur)
                 for target in adj_list[cur]:

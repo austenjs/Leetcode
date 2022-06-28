@@ -5,23 +5,12 @@ class Solution:
         """
         N = len(nums)
         k = k % N
-        if k == 0:
-            return
-        l, r = 0, N - k - 1
-        while l < r:
-            nums[l], nums[r] = nums[r], nums[l]
-            l += 1
-            r -= 1
-        l = 0
-        r = N - 1
-        
-        while l < r:
-            nums[l], nums[r] = nums[r], nums[l]
-            l += 1
-            r -= 1
-        
-        l, r = 0, k - 1
-        while l < r:
-            nums[l], nums[r] = nums[r], nums[l]
-            l += 1
-            r -= 1
+        self.reverse(nums, 0, N - 1)
+        self.reverse(nums, 0, k - 1)
+        self.reverse(nums, k, N - 1)
+    
+    def reverse(self, nums, start, end):
+        while start < end:
+            nums[start], nums[end] = nums[end], nums[start]
+            start += 1
+            end -= 1

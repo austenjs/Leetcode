@@ -3,12 +3,10 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        pos = 0
-        
-        for i, num in enumerate(nums):
+        left = 0
+        N = len(nums)
+        for i in range(N):
+            num = nums[i]
             if num != 0:
-                nums[pos], nums[i] = nums[i], nums[pos]
-                pos += 1
-
-
-            
+                nums[left], nums[i] = num, nums[left]
+                left += 1

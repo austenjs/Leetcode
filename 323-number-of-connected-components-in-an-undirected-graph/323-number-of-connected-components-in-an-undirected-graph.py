@@ -1,29 +1,27 @@
 from collections import deque, defaultdict
+class UnionFind:
+    def __init__(self, N):
+        self.parents = list(range(N))
+
+    def union(self, child, parent):
+        self.parents[self.find(child)] = self.find(parent)
+
+    def find(self, child):
+        if child != self.parents[child]:
+            self.parents[child] = self.find(self.parents[child])
+        return self.parents[child]
 
 class Solution:
+    
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        visited = set()
-        adj_list = defaultdict(list)
-        for i, j in edges:
-            adj_list[i].append(j)
-            adj_list[j].append(i)
+        uf = UnionFind(n)
         
-        def bfs(start):
-            if start in visited:
-                return 0
-            queue = deque([start])
-            while queue:
-                cur = queue.popleft()
-                if cur in visited:
-                    continue
-                visited.add(cur)
-                for neighbor in adj_list[cur]:
-                    queue.append(neighbor)
-            return 1
+        for child, parent in edges:
+            uf.union(child, parent)
         
-        count = 0
+        parents = set()
         for i in range(n):
-            count += bfs(i)
-        return count
+            parents.add(uf.find(i))
+        return len(parents)
         
                 

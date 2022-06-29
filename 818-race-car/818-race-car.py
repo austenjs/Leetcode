@@ -9,7 +9,7 @@ class Solution:
             speed, pos, num_action = queue.popleft()
             if (speed, pos) in visited:
                 continue
-            if pos >= 1.5 * target:
+            if pos >= 1.3 * target:
                 continue
             if pos == target:
                 return num_action

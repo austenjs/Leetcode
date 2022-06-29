@@ -5,11 +5,10 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        prev, pointer = None, head
+        if head is None or head.next is None:
+            return head
         
-        while pointer:
-            tmp = pointer.next
-            pointer.next = prev
-            prev, pointer = pointer, tmp
-        
-        return prev
+        new_head = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return new_head

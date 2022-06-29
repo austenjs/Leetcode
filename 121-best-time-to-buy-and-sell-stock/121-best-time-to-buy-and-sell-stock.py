@@ -7,5 +7,6 @@ class Solution:
         for price in prices:
             if price < cur_min:
                 cur_min = price
-            ans = max(price - cur_min, ans)
+            elif price - cur_min > ans:
+                ans = price - cur_min
         return ans

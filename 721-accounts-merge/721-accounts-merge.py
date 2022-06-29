@@ -1,32 +1,30 @@
-from collections import defaultdict, deque
+class UF:
+    def __init__(self, N):
+        self.parents = list(range(N))
 
+    def union(self, child, parent):
+        self.parents[self.find(child)] = self.find(parent)
+
+    def find(self, x):
+        if x != self.parents[x]:
+            self.parents[x] = self.find(self.parents[x])
+        return self.parents[x]
+    
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        # Create adj list
-        adj_list = defaultdict(set)
-        for name, *emails in accounts:
-            for email1 in emails:
-                for email2 in emails:
-                    if email1 == email2:
-                        continue
-                    adj_list[email1].add(email2)
-                    adj_list[email2].add(email1)
+        uf = UF(len(accounts))
         
-        ans = []
-        added = set()
-        for acc in accounts:
-            name, email = acc[:2]
-            if email in added:
-                continue
-            new_emails = []
-            queue = deque([email])
-            while queue:
-                cur = queue.popleft()
-                if cur in added:
-                    continue
-                new_emails.append(cur)
-                added.add(cur)
-                for neighbor in adj_list[cur]:
-                    queue.append(neighbor)
-            ans.append([name, *sorted(new_emails)])
-        return ans 
+        # Creat unions between indexes
+        ownership = {}
+        for i, (_, *emails) in enumerate(accounts):
+            for email in emails:
+                if email in ownership:
+                    uf.union(i, ownership[email])
+                ownership[email] = i
+        
+        # Append emails to correct index
+        ans = collections.defaultdict(list)
+        for email, owner in ownership.items():
+            ans[uf.find(owner)].append(email)
+        
+        return [[accounts[i][0]] + sorted(emails) for i, emails in ans.items()]

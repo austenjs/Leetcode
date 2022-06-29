@@ -12,10 +12,14 @@ class TimeMap:
     def get(self, key: str, timestamp: int) -> str:
         if key not in self.storage:
             return ""
-        while timestamp:
-            if timestamp in self.storage[key]:
-                return self.storage[key][timestamp]
-            timestamp -= 1
+        time = timestamp
+        while time:
+            if time in self.storage[key]:
+                ans = self.storage[key][time]
+                for t in range(time, timestamp + 1):
+                    self.storage[key][time] = ans
+                return ans
+            time -= 1
         return ""
                 
 

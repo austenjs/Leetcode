@@ -8,28 +8,15 @@ from collections import deque
 
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        height = self.get_height(root)
-        queue = deque([root])
         ans = []
-        for _ in range(height):
-            new_queue = deque()
-            last = None
-            while queue:
-                cur = queue.popleft()
-                if cur is None:
-                    continue
-                last = cur
-                new_queue.append(cur.left)
-                new_queue.append(cur.right)
-            queue = new_queue
-            if last is None:
-                continue
-            ans.append(last.val)
+
+        def dfs(node, level):
+            if node is None:
+                return
+            if len(ans) == level:
+                ans.append(node.val)
+            dfs(node.right, level + 1)
+            dfs(node.left, level + 1)
+        
+        dfs(root, 0)
         return ans
-            
-    def get_height(self, root):
-        if root is None:
-            return 0
-        left = self.get_height(root.left)
-        right = self.get_height(root.right)
-        return 1 + max(left, right)

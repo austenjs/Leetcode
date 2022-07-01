@@ -2,15 +2,14 @@ from collections import Counter
 
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        count = Counter(s)
-        ans = 0
-        exist_single_char = False
+        num_pairs = 0
+        unpaired_chars = set()
         
-        for val in count.values():
-            if val % 2 == 1:
-                exist_single_char = True
-                ans += val - 1
+        for char in s:
+            if char in unpaired_chars:
+                num_pairs += 1
+                unpaired_chars.remove(char)
             else:
-                ans += val
+                unpaired_chars.add(char)
         
-        return ans + exist_single_char
+        return num_pairs * 2 + 1 if unpaired_chars else num_pairs * 2

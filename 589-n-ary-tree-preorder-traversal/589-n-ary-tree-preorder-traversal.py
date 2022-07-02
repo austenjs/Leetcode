@@ -12,5 +12,5 @@ class Solution:
             return []
         ans = [root.val]
         for child in root.children:
-            ans.extend(self.preorder(child))
+            ans += self.preorder(child)
         return ans

@@ -1,6 +1,6 @@
 class Solution:
     def __init__(self):
-        self.memo = {1 : 1, 2 : 2, 3 : 3}
+        self.memo = {1 : 1, 2 : 2}
         
     def climbStairs(self, n: int) -> int:
         if n in self.memo:
